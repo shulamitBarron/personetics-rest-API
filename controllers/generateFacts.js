@@ -16,7 +16,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
     accounts = accounts.map(function (t) { return (__assign({}, t, { name: { en: t.name }, accountNumber: t.number, "count": Math.abs(t.amount), "sum": Math.abs(t.balance), "avg": Math.abs(t.balance), "std": Math.abs(t.balance) })); });
     var theTransactions = [];
     var theAccounts = [];
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     var facts = {};
     var periods = [];
     var per = Math.floor(Math.random() * 3) + 5;
@@ -30,7 +30,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
                 return theTrans_1.filter(function (a, i) {
                     return i !== idx && a.amount == item.amount && a.transaction === item.transaction &&
                         (new Date(a.date)).getTime() === (new Date(item.date)).getTime() &&
-                        Math.ceil(Math.abs(new Date().getTime() -
+                        Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                             new Date(a.date).getTime()) / (1000 * 3600 * 24)) <= 4;
                 }).length + 1 > 1;
             });
@@ -96,7 +96,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
             theTransactions = transactions.filter(function (t) {
                 return t.Mode === "In" && t.type === "DepositCheck" &&
-                    Math.ceil(Math.abs(new Date().getTime() -
+                    Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                         new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4;
             });
             theAccounts = accounts.filter(function (account) {
@@ -163,7 +163,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
             break;
         case "c71202e6-46b8-42ec-ba53-5dc25d6db393":
             theTransactions = transactions.filter(function (t) { return t.type === "PostedCheck" &&
-                t.Mode === "Out" && Math.ceil(Math.abs(new Date().getTime() -
+                t.Mode === "Out" && Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                 new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2; });
             theTransactions = theTransactions.sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); }).reverse();
             theAccounts = accounts.filter(function (account) {
@@ -179,35 +179,35 @@ exports.generateFacts = function (storyId, transactions, accounts) {
             }
             break;
         case "b6b765af-0378-4413-a4f3-aa83d816d586":
-            theTransactions = transactions.filter(function (t) { return t.mode === "Out"; });
-            var categories_1 = theTransactions.map(function (t) { return t.categoryDescription.en; });
-            var categoryDescriptions = categories_1.filter(function (t, i) { return t && t !== "null" && categories_1.indexOf(t) === i; });
-            var selectedCategory_1 = categoryDescriptions[Math.floor(Math.random() * categoryDescriptions.length)];
-            theTransactions = theTransactions.filter(function (t) { return t.categoryDescription.en === selectedCategory_1; });
-            theAccounts = accounts.filter(function (account) {
-                return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
-            });
-            if (theTransactions.length && theAccounts.length) {
-                var selectedAccount_1 = theAccounts[Math.floor(Math.random() * theAccounts.length)];
-                theTransactions = theTransactions.filter(function (t) {
-                    var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
-                    var curYear, curMonth = curDate.getMonth() + 1;
-                    if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
-                        curMonth += (curYear - usrYear) * 12;
-                    }
-                    var diffMonths = curMonth - usrMonth;
-                    return t.accountNumber === selectedAccount_1.number && diffMonths && diffMonths <= periods.length;
+            do {
+                theTransactions = transactions.filter(function (t) { return t.mode === "Out"; });
+                var categories_1 = theTransactions.map(function (t) { return t.categoryDescription.en; });
+                var categoryDescriptions = categories_1.filter(function (t, i) { return t && t !== "null" && categories_1.indexOf(t) === i; });
+                var selectedCategory_1 = categoryDescriptions[Math.floor(Math.random() * categoryDescriptions.length)];
+                theTransactions = theTransactions.filter(function (t) { return t.categoryDescription.en === selectedCategory_1; });
+                theAccounts = accounts.filter(function (account) {
+                    return theTransactions.filter(function (t) { return t.accountNumber === account.number; }).length > 0;
                 });
-                insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
-                    return facts[table] = generateTable_1.default(table, theTransactions, [selectedAccount_1], [["In"], ["Out"]], periods, selectedCategory_1);
-                });
+                if (theTransactions.length && theAccounts.length) {
+                    var selectedAccount_1 = theAccounts[0];
+                    theTransactions = theTransactions.filter(function (t) {
+                        var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
+                        var curYear, curMonth = curDate.getMonth() + 1;
+                        if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
+                            curMonth += (curYear - usrYear) * 12;
+                        }
+                        var diffMonths = curMonth - usrMonth;
+                        return t.accountNumber === selectedAccount_1.number && diffMonths && diffMonths <= periods.length;
+                    });
+                    insightsConfiguration_1.tablesForStory[insightsConfiguration_1.storyIdForInsightId[storyId]].map(function (table) {
+                        return facts[table] = generateTable_1.default(table, theTransactions, [selectedAccount_1], [["In"], ["Out"]], periods, selectedCategory_1);
+                    });
+                }
             }
-            else {
-                throw "error";
-            }
+            while(!theTransactions.length);
             break;
         case "22741535-e6d1-4aa3-93de-a021efb8f34c":
-            theTransactions = transactions.filter(function (t) { return t.mode === "Out" && (new Date(t.date)).getDate() === (new Date()).getDate(); });
+            theTransactions = transactions.filter(function (t) { return t.mode === "Out" && (new Date(t.date)).getDate() === (new Date("2019-02-28")).getDate(); });
             theTransactions = common_1.groupBy(theTransactions, function (item) { return [item.transaction]; });
             var p_1 = [1, 2, 3];
             theTransactions = theTransactions.filter(function (a) { return !p_1.filter(function (pp) { return !a.find(function (t) {
@@ -240,7 +240,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
                 return [(new Date(item.date)).getMonth(), (new Date(item.date)).getFullYear()];
             }); });
             theTransactions = theTransactions.map(function (theT) { return theT.filter(function (theTransactions_0) {
-                var curDate = new Date();
+                var curDate = new Date("2019-02-28");
                 var t = theTransactions_0[0];
                 var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
                 var curYear, curMonth = curDate.getMonth() + 1;
@@ -251,12 +251,12 @@ exports.generateFacts = function (storyId, transactions, accounts) {
                 return diffMonths && diffMonths < 4;
             }); });
             var peri_1 = [2, 3, 4];
-            theTransactions = theTransactions.map(function (theTransaction) { return ({
+            theTransactions = theTransactions.filter(function(item){ return item[0] && item[0][0];}).map(function (theTransaction) { return ({
                 theTransactions: theTransaction,
                 categoryDescription: theTransaction[0][0].categoryDescription,
                 avg: peri_1.map(function (p) {
                     var trans = theTransaction.filter(function (theTransactions_0) {
-                        var curDate = new Date();
+                        var curDate = new Date("2019-02-28");
                         var t = theTransactions_0[0];
                         var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
                         var curYear, curMonth = curDate.getMonth() + 1;
@@ -271,7 +271,7 @@ exports.generateFacts = function (storyId, transactions, accounts) {
             }); });
             theTransactions = theTransactions.map(function (tt) {
                 var lastTr = tt.theTransactions.filter(function (theTransactions_0) {
-                    var curDate = new Date();
+                    var curDate = new Date("2019-02-28");
                     var t = theTransactions_0[0];
                     var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
                     var curYear, curMonth = curDate.getMonth() + 1;

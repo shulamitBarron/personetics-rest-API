@@ -23,7 +23,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
     }));
     let theTransactions = [];
     let theAccounts = [];
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     const facts = {};
     const periods = [];
     const per = Math.floor(Math.random() * 3) + 5;
@@ -37,7 +37,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
                 theTrans.filter((a , i) =>
                     i !== idx && a.amount == item.amount && a.transaction === item.transaction &&
                     (new Date(a.date)).getTime() === (new Date(item.date)).getTime() &&
-                    Math.ceil(Math.abs(new Date().getTime() -
+                    Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                         new Date(a.date).getTime()) / (1000 * 3600 * 24)) <= 4).length + 1 > 1
             );
             if (theTrans.length) {
@@ -90,7 +90,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
             theTransactions = transactions.filter(t =>
                 t.Mode === "In" && t.type === "DepositCheck" &&
-                Math.ceil(Math.abs(new Date().getTime() -
+                Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4);
             theAccounts = accounts.filter(account =>
                 theTransactions.filter(t => t.accountNumber === account.number).length > 0);
@@ -145,7 +145,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
             break;
         case "c71202e6-46b8-42ec-ba53-5dc25d6db393":
             theTransactions = transactions.filter((t: any) => t.type === "PostedCheck" &&
-                t.Mode === "Out" && Math.ceil(Math.abs(new Date().getTime() -
+                t.Mode === "Out" && Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2);
             theTransactions = theTransactions.sort((a , b) => -1 * a.date.getTime() - b.date.getTime()).reverse();
             theAccounts = accounts.filter(account =>
@@ -158,32 +158,33 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
             }
             break;
         case "b6b765af-0378-4413-a4f3-aa83d816d586":
-            theTransactions = transactions.filter((t: any) => t.mode === "Out");
-            const categories = theTransactions.map(t => t.categoryDescription.en);
-            const categoryDescriptions = categories.filter((t , i) => t && t !== "null" && categories.indexOf(t) === i);
-            const selectedCategory = categoryDescriptions[Math.floor(Math.random() * categoryDescriptions.length)];
-            theTransactions = theTransactions.filter((t: any) => t.categoryDescription.en === selectedCategory);
-            theAccounts = accounts.filter(account =>
-                theTransactions.filter(t => t.accountNumber === account.number).length > 0);
-            if (theTransactions.length && theAccounts.length) {
-                const selectedAccount = theAccounts[Math.floor(Math.random() * theAccounts.length)];
-                theTransactions = theTransactions.filter(t => {
-                    let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
-                    let curYear , curMonth = curDate.getMonth() + 1;
-                    if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
-                        curMonth += (curYear - usrYear) * 12;
-                    }
-                    let diffMonths = curMonth - usrMonth;
-                    return t.accountNumber === selectedAccount.number && diffMonths && diffMonths <= periods.length
-                });
-                tablesForStory[storyIdForInsightId[storyId]].map(table =>
-                    facts[table] = generateTble(table , theTransactions , [selectedAccount] , [["In"] , ["Out"]] , periods , selectedCategory));
-            } else {
-                throw "error";
+            do {
+                theTransactions = transactions.filter((t: any) => t.mode === "Out");
+                const categories = theTransactions.map(t => t.categoryDescription.en);
+                const categoryDescriptions = categories.filter((t , i) => t && t !== "null" && categories.indexOf(t) === i);
+                const selectedCategory = categoryDescriptions[Math.floor(Math.random() * categoryDescriptions.length)];
+                theTransactions = theTransactions.filter((t: any) => t.categoryDescription.en === selectedCategory);
+                theAccounts = accounts.filter(account =>
+                    theTransactions.filter(t => t.accountNumber === account.number).length > 0);
+                if (theTransactions.length && theAccounts.length) {
+                    const selectedAccount = theAccounts[Math.floor(Math.random() * theAccounts.length)];
+                    theTransactions = theTransactions.filter(t => {
+                        let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
+                        let curYear , curMonth = curDate.getMonth() + 1;
+                        if ((usrYear = new Date(t.date).getFullYear()) < (curYear = curDate.getFullYear())) {
+                            curMonth += (curYear - usrYear) * 12;
+                        }
+                        let diffMonths = curMonth - usrMonth;
+                        return t.accountNumber === selectedAccount.number && diffMonths && diffMonths <= periods.length
+                    });
+                    tablesForStory[storyIdForInsightId[storyId]].map(table =>
+                        facts[table] = generateTble(table , theTransactions , [selectedAccount] , [["In"] , ["Out"]] , periods , selectedCategory));
+                }                
             }
+            while(!theTransactions.length);
             break;
         case "22741535-e6d1-4aa3-93de-a021efb8f34c":
-            theTransactions = transactions.filter(t => t.mode === "Out" && (new Date(t.date)).getDate() === (new Date()).getDate());
+            theTransactions = transactions.filter(t => t.mode === "Out" && (new Date(t.date)).getDate() === (new Date("2019-02-28")).getDate());
             theTransactions = groupBy(theTransactions , item => [item.transaction]);
             const p = [1 , 2 , 3];
             theTransactions = theTransactions.filter(a => !p.filter(pp => !a.find(t => {
@@ -213,7 +214,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
             theTransactions = theTransactions.map(t => groupBy(t , item =>
                 [(new Date(item.date)).getMonth() , (new Date(item.date)).getFullYear()]));
             theTransactions = theTransactions.map(theT => theT.filter(theTransactions_0 => {
-                const curDate = new Date();
+                const curDate = new Date("2019-02-28");
                 let t = theTransactions_0[0];
                 let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
                 let curYear , curMonth = curDate.getMonth() + 1;
@@ -225,12 +226,12 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
 
             }));
             const peri = [2 , 3 , 4];
-            theTransactions = theTransactions.map(theTransaction => ({
+            theTransactions = theTransactions.filter(item => item[0] && item[0][0]).map(theTransaction => ({
                 theTransactions: theTransaction ,
                 categoryDescription: theTransaction[0][0].categoryDescription ,
                 avg: peri.map(p => {
                     var trans = theTransaction.filter(theTransactions_0 => {
-                        const curDate = new Date();
+                        const curDate = new Date("2019-02-28");
                         let t = theTransactions_0[0];
                         let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
                         let curYear , curMonth = curDate.getMonth() + 1;
@@ -246,7 +247,7 @@ export const generateFacts = (storyId , transactions , accounts): {} => {
             }));
             theTransactions = theTransactions.map(tt => {
                 const lastTr = tt.theTransactions.filter(theTransactions_0 => {
-                    const curDate = new Date();
+                    const curDate = new Date("2019-02-28");
                     let t = theTransactions_0[0];
                     let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
                     let curYear , curMonth = curDate.getMonth() + 1;

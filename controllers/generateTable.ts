@@ -4,7 +4,7 @@ import {groupBy} from "./common";
 export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seriesNames = [] , periods = [] , selectedCategory = "") => {
     let table = {...tables[t]};
     let maxDate;
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     switch (table.case) {
         case "transaction":
             maxDate = new Date(Math.max.apply(null , theTransactions.map(t => new Date(t.date))));
@@ -18,7 +18,7 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
             table.rows = [[theTransactions.length]];
             break;
         case "currentDate":
-            table.rows = [[new Date()]];
+            table.rows = [[new Date("2019-02-28")]];
             break;
         case "accounts":
             table.rows = accounts.map(account => table.cols.map(col => account[col] ? account[col] : null));
@@ -40,12 +40,12 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
             break;
         case "amount":
             theTransactions = theTransactions
-                .filter(t => new Date(t.date).getMonth() === new Date().getMonth())
+                .filter(t => new Date(t.date).getMonth() === new Date("2019-02-28").getMonth())
                 .map(t => +t.amount);
             table.rows = [[theTransactions.length ? theTransactions.reduce((a , b) => a + b) : 0]];
             break;
         case "localCurrencyCd":
-            table.rows = [[theTransactions[0].currencyCd]];
+            table.rows = [[theTransactions[0] && theTransactions[0].currencyCd]];
             break;
         case "barChartExpenses":
             const AccountTransactions = groupBy(theTransactions , item => [item.month , item.account]);
@@ -59,7 +59,7 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
                 a[0] === AT && a[2] === p) ? table.rows.push([AT ,
                 0.00 ,
                 p ,
-                theTransactions[0].currencyCd]) : null))
+                theTransactions[0] && theTransactions[0].currencyCd]) : null))
             break;
         case "periods":
             table.rows = periods.map(p => [p]);
@@ -73,7 +73,7 @@ export default (t: any , theTransactions: any[] = [] , accounts: any = [] , seri
             table.rows = [["CG10000" , {"en": selectedCategory}]];
             break;
         case "quizRanges":
-            const avg = Math.abs(theTransactions.map(t => +t.amount).reduce((a , b) => a + b) / periods.length);
+            const avg = theTransactions.length ? Math.abs(theTransactions.map(t => +t.amount).reduce((a , b) => a + b) / periods.length) : 0;
             let random = Math.floor(Math.random() * 2000) + avg - 2000;
             random = random < 0 ? 0 : random;
             const range = [];

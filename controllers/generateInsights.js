@@ -52,7 +52,7 @@ var teaserBlocks = function (id, lang, curDate) {
     ];
 };
 var generqateInsights = function (id) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return {
         id: id,
         generatedDate: curDate,
@@ -67,7 +67,7 @@ var generqateInsights = function (id) {
     };
 };
 var generqateInsight67f = function (id, transactions, value, length, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     var teaser = teaserBlocks(id, lang, curDate);
     teaser[2].text = teaser[2].text.replace("{{transaction}}", value.transaction);
     return __assign({}, generqateInsights(id), { teaserTemplate: "doubleBox", teaserBlocks: teaser.concat([
@@ -93,8 +93,9 @@ var generqateInsight67f = function (id, transactions, value, length, lang) {
             }
         ]), score: 26.0, category1: "", category2: "", category3: "" });
 };
+
 var generqateInsight85c = function (id, transactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "image", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 blockId: "main-image",
@@ -104,8 +105,9 @@ var generqateInsight85c = function (id, transactions, lang) {
             }
         ]), score: 26.0, category1: "Information", category2: "Spending", category3: "money_in" });
 };
+
 var generqateInsightda0 = function (id, transactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "pinChart", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 blockId: "chart",
@@ -128,8 +130,9 @@ var generqateInsightda0 = function (id, transactions, lang) {
             }
         ]), score: 15.0, category1: "", category2: "", category3: "" });
 };
+
 var generqateInsightfe0 = function (id, transactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "pinChart", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 blockId: "chart",
@@ -152,8 +155,9 @@ var generqateInsightfe0 = function (id, transactions, lang) {
             }
         ]), score: 13, category1: "", category2: "", category3: "" });
 };
+
 var generqateInsight22c = function (id, transactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "image", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 blockId: "main-image",
@@ -164,7 +168,7 @@ var generqateInsight22c = function (id, transactions, lang) {
         ]), score: 50, category1: "smiley_face", category2: "Spending", category3: "Information" });
 };
 var generqateInsight372 = function (id, transactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     var teaser = teaserBlocks(id, lang, curDate);
     teaser[2].text = teaser[2].text.replace("{{month}}", month_1.default[lang][curDate.getMonth() - 1]);
     return __assign({}, generqateInsights(id), { teaserTemplate: "horizontalBar", teaserBlocks: teaser.concat([
@@ -197,15 +201,15 @@ var generqateInsight372 = function (id, transactions, lang) {
         ]), score: 7, category1: "in_out", category2: "Spending", category3: "money_in" });
 };
 var generqateInsight3f2 = function (id, sortedFilterTransactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "pie", teaserBlocks: teaserBlocks(id, lang, curDate).concat(generateCategory(sortedFilterTransactions)), score: 3, category1: "spend_decrease" });
 };
 var generqateInsight3f2B = function (id, sortedFilterTransactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "pie", teaserBlocks: teaserBlocks(id, lang, curDate).concat(generateCategory(sortedFilterTransactions)), score: 3, category1: "spend_decrease" });
 };
 var generqateInsight393 = function (id, length, reduce, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "doubleBox", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 blockId: "box-label1",
@@ -230,7 +234,7 @@ var generqateInsight393 = function (id, length, reduce, lang) {
         ]), score: 7, category1: "Information", category2: "", category3: "" });
 };
 var generqateInsight586 = function (id, amount, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "image", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 "blockId": "main-image",
@@ -241,7 +245,7 @@ var generqateInsight586 = function (id, amount, lang) {
         ]), score: 7, category1: "", category2: "", category3: "" });
 };
 var generqateInsight34c = function (id, transactions, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     return __assign({}, generqateInsights(id), { teaserTemplate: "pinChart", teaserBlocks: teaserBlocks(id, lang, curDate).concat([
             {
                 "blockId": "chart",
@@ -265,7 +269,7 @@ var generqateInsight34c = function (id, transactions, lang) {
         ]), score: 7, category1: "spend_decrease", category2: "", category3: "" });
 };
 function generqateInsight7a5(id, categoryDescription, lang) {
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     var teaser = teaserBlocks(id, lang, curDate);
     teaser[2].text = teaser[2].text.replace("{{categoryDescription}}", categoryDescription);
     teaser[2].text = teaser[2].text.replace("{{month}}", month_1.default[lang][curDate.getMonth() - 1]);
@@ -281,7 +285,7 @@ function generqateInsight7a5(id, categoryDescription, lang) {
 exports.default = function (id, transactions, lang, messages) {
     insightsMessages = messages;
     var amount;
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     var prevDate = new Date((new Date).setMonth(curDate.getMonth() - 1));
     transactions = transactions.map(function (t) {
         return (__assign({}, t, { date: new Date(t.date), month: (new Date(t.date).getMonth()).toString(), mode: t.Mode }));
@@ -294,7 +298,7 @@ exports.default = function (id, transactions, lang, messages) {
                 return (length_1 = amount.filter(function (a, i) {
                     return i !== idx && a.amount == item.amount && a.transaction === item.transaction &&
                         (new Date(a.date)).getTime() === (new Date(item.date)).getTime() &&
-                        Math.ceil(Math.abs(new Date().getTime() -
+                        Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                             new Date(a.date).getTime()) / (1000 * 3600 * 24)) <= 4;
                 }).length + 1) > 1;
             });
@@ -302,7 +306,7 @@ exports.default = function (id, transactions, lang, messages) {
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
             amount = transactions.filter(function (t) {
                 return t.type === "DepositCheck" && t.Mode === "In" &&
-                    Math.ceil(Math.abs(new Date().getTime() -
+                    Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                         new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4;
             });
             return amount.length ? generqateInsight85c(id, amount, lang) : null;
@@ -320,7 +324,7 @@ exports.default = function (id, transactions, lang, messages) {
             });
             amount = amount.sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); }).slice(0, 5).reverse();
             return amount.find(function (t) {
-                return Math.ceil(Math.abs(new Date().getTime() -
+                return Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4;
             }) ?
                 generqateInsightda0(id, amount, lang) : null;
@@ -336,9 +340,9 @@ exports.default = function (id, transactions, lang, messages) {
                     diffMonths--;
                 return t.categoryDescription === "Government" && t.Mode === "In" && diffMonths < 12;
             });
-            amount = amount.sort(function (a, b) { return -1 * a.date.getTime() - b.date.getTime(); }).slice(0, 5).reverse();
+            amount = amount.sort(function (a, b) { return -1 * (a.date.getTime() - b.date.getTime()); }).slice(0, 5).reverse();
             return amount.find(function (t) {
-                return Math.ceil(Math.abs(new Date().getTime() -
+                return Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4;
             }) ?
                 generqateInsightfe0(id, amount, lang) : null;
@@ -365,7 +369,7 @@ exports.default = function (id, transactions, lang, messages) {
                     return diffMonths === 2;
                 })
             ];
-            return amount[0].length && amount[1].length && curDate.getDate() < 20 ? generqateInsight372(id, amount, lang) : null;
+            return amount[0].length && amount[1].length && curDate.getDate() < 30 ? generqateInsight372(id, amount, lang) : null;
         case "6b739292-bb50-4284-9d66-342de48403f2":
             var filterOutTansaction = common_1.groupBy(transactions.filter(function (t) {
                 var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
@@ -380,7 +384,7 @@ exports.default = function (id, transactions, lang, messages) {
                 category: tran[0].categoryDescription,
                 value: Math.abs(tran.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }))
             }); }).sort(function (a, b) { return a.value > b.value ? -1 : 1; });
-            return sortedFilterOutTransactions.length && curDate.getDate() < 20 ?
+            return sortedFilterOutTransactions.length && curDate.getDate() < 30 ?
                 generqateInsight3f2(id, sortedFilterOutTransactions, lang) : null;
         case "6b739292-bb50-4284-9d66-342de48403f2-b":
             var filterInTransaction = common_1.groupBy(transactions.filter(function (t) {
@@ -392,20 +396,20 @@ exports.default = function (id, transactions, lang, messages) {
                 category: tran[0].categoryDescription,
                 value: Math.abs(tran.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }))
             }); }).sort(function (a, b) { return a.value > b.value ? -1 : 1; });
-            return sortedFilterInTransactions.length && curDate.getDate() < 20 ?
+            return sortedFilterInTransactions.length && curDate.getDate() < 30 ?
                 generqateInsight3f2B(id, sortedFilterInTransactions, lang) : null;
         case "c71202e6-46b8-42ec-ba53-5dc25d6db393":
             amount = transactions.filter(function (t) { return t.type === "PostedCheck" &&
-                t.Mode === "Out" && Math.ceil(Math.abs(new Date().getTime() -
+                t.Mode === "Out" && Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                 new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2; });
             return amount.length ?
                 generqateInsight393(id, amount.length, amount.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }), lang) : null;
         case "b6b765af-0378-4413-a4f3-aa83d816d586":
             amount = transactions;
-            return amount.length && curDate.getDate() % 3 === 2 ?
+            return amount.length ?
                 generqateInsight586(id, amount, lang) : null;
         case "22741535-e6d1-4aa3-93de-a021efb8f34c":
-            amount = transactions.filter(function (t) { return t.mode === "Out" && (new Date(t.date)).getDate() === (new Date()).getDate(); });
+            amount = transactions.filter(function (t) { return t.mode === "Out" && (new Date(t.date)).getDate() === (new Date("2019-02-28")).getDate(); });
             amount = common_1.groupBy(amount, function (item) { return [item.transaction]; });
             var periods_1 = [1, 2, 3];
             amount = amount.filter(function (a) { return !periods_1.filter(function (pp) { return !a.find(function (t) {
@@ -426,7 +430,7 @@ exports.default = function (id, transactions, lang, messages) {
                 return [(new Date(item.date)).getMonth(), (new Date(item.date)).getFullYear()];
             }); });
             theTransactions = theTransactions.map(function (theT) { return theT.filter(function (theTransactions_0) {
-                var curDate = new Date();
+                var curDate = new Date("2019-02-28");
                 var t = theTransactions_0[0];
                 var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
                 var curYear, curMonth = curDate.getMonth() + 1;
@@ -437,12 +441,12 @@ exports.default = function (id, transactions, lang, messages) {
                 return diffMonths && diffMonths < 4;
             }); });
             var peri_1 = [2, 3, 4];
-            theTransactions = theTransactions.map(function (theTransaction) { return ({
+            theTransactions = theTransactions.filter(function(item){ return item[0] && item[0][0];}).map(function (theTransaction) { return ({
                 theTransactions: theTransaction,
                 categoryDescription: theTransaction[0][0].categoryDescription,
                 avg: peri_1.map(function (p) {
                     var trans = theTransaction.filter(function (theTransactions_0) {
-                        var curDate = new Date();
+                        var curDate = new Date("2019-02-28");
                         var t = theTransactions_0[0];
                         var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
                         var curYear, curMonth = curDate.getMonth() + 1;
@@ -457,7 +461,7 @@ exports.default = function (id, transactions, lang, messages) {
             }); });
             theTransactions = theTransactions.map(function (tt) {
                 var lastTr = tt.theTransactions.filter(function (theTransactions_0) {
-                    var curDate = new Date();
+                    var curDate = new Date("2019-02-28");
                     var t = theTransactions_0[0];
                     var usrYear, usrMonth = new Date(t.date).getMonth() + 1;
                     var curYear, curMonth = curDate.getMonth() + 1;
@@ -475,7 +479,7 @@ exports.default = function (id, transactions, lang, messages) {
                 };
             });
             theTransactions = theTransactions.sort(function (a, b) { return a.Difference - b.Difference; });
-            return theTransactions.length && curDate.getDate() < 20 ?
+            return theTransactions.length && curDate.getDate() < 30 ?
                 generqateInsight7a5(id, theTransactions[0].categoryDescription, lang) : null;
         default:
             break;

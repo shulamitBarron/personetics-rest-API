@@ -18,7 +18,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods, 
     if (selectedCategory === void 0) { selectedCategory = ""; }
     var table = __assign({}, Tables_1.default[t]);
     var maxDate;
-    var curDate = new Date();
+    var curDate = new Date("2019-02-28");
     switch (table.case) {
         case "transaction":
             maxDate = new Date(Math.max.apply(null, theTransactions.map(function (t) { return new Date(t.date); })));
@@ -32,7 +32,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods, 
             table.rows = [[theTransactions.length]];
             break;
         case "currentDate":
-            table.rows = [[new Date()]];
+            table.rows = [[new Date("2019-02-28")]];
             break;
         case "accounts":
             table.rows = accounts.map(function (account) { return table.cols.map(function (col) { return account[col] ? account[col] : null; }); });
@@ -54,12 +54,12 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods, 
             break;
         case "amount":
             theTransactions = theTransactions
-                .filter(function (t) { return new Date(t.date).getMonth() === new Date().getMonth(); })
+                .filter(function (t) { return new Date(t.date).getMonth() === new Date("2019-02-28").getMonth(); })
                 .map(function (t) { return +t.amount; });
             table.rows = [[theTransactions.length ? theTransactions.reduce(function (a, b) { return a + b; }) : 0]];
             break;
         case "localCurrencyCd":
-            table.rows = [[theTransactions[0].currencyCd]];
+            table.rows = [[theTransactions[0] && theTransactions[0].currencyCd]];
             break;
         case "barChartExpenses":
             var AccountTransactions = common_1.groupBy(theTransactions, function (item) { return [item.month, item.account]; });
@@ -74,7 +74,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods, 
             }) ? table.rows.push([AT,
                 0.00,
                 p,
-                theTransactions[0].currencyCd]) : null; }); });
+                theTransactions[0] && theTransactions[0].currencyCd]) : null; }); });
             break;
         case "periods":
             table.rows = periods.map(function (p) { return [p]; });
@@ -88,7 +88,7 @@ exports.default = function (t, theTransactions, accounts, seriesNames, periods, 
             table.rows = [["CG10000", { "en": selectedCategory }]];
             break;
         case "quizRanges":
-            var avg = Math.abs(theTransactions.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }) / periods.length);
+            var avg = theTransactions.length ? Math.abs(theTransactions.map(function (t) { return +t.amount; }).reduce(function (a, b) { return a + b; }) / periods.length) : 0;
             var random = Math.floor(Math.random() * 2000) + avg - 2000;
             random = random < 0 ? 0 : random;
             var range = [];

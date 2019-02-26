@@ -46,7 +46,7 @@ const teaserBlocks = (id , lang , curDate): any[] => {
 };
 
 const generqateInsights = (id) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         id ,
         generatedDate: curDate ,
@@ -62,7 +62,7 @@ const generqateInsights = (id) => {
 }
 
 const generqateInsight67f = (id , transactions , value , length , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     const teaser = teaserBlocks(id , lang , curDate);
     teaser[2].text = teaser[2].text.replace("{{transaction}}" , value.transaction);
     return {
@@ -99,7 +99,7 @@ const generqateInsight67f = (id , transactions , value , length , lang) => {
 }
 
 const generqateInsight85c = (id , transactions , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "image" ,
@@ -120,7 +120,7 @@ const generqateInsight85c = (id , transactions , lang) => {
 }
 
 const generqateInsightda0 = (id , transactions: any[] , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "pinChart" ,
@@ -152,7 +152,7 @@ const generqateInsightda0 = (id , transactions: any[] , lang) => {
 }
 
 const generqateInsightfe0 = (id , transactions , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "pinChart" ,
@@ -184,7 +184,7 @@ const generqateInsightfe0 = (id , transactions , lang) => {
 }
 
 const generqateInsight22c = (id , transactions , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "image" ,
@@ -205,7 +205,7 @@ const generqateInsight22c = (id , transactions , lang) => {
 }
 
 const generqateInsight372 = (id , transactions , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     const teaser = teaserBlocks(id , lang , curDate);
     teaser[2].text = teaser[2].text.replace("{{month}}" , monthNames[lang][curDate.getMonth() - 1]);
     return {
@@ -247,7 +247,7 @@ const generqateInsight372 = (id , transactions , lang) => {
 }
 
 const generqateInsight3f2 = (id , sortedFilterTransactions , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
 
     return {
         ...generqateInsights(id) ,
@@ -262,7 +262,7 @@ const generqateInsight3f2 = (id , sortedFilterTransactions , lang) => {
 }
 
 const generqateInsight3f2B = (id , sortedFilterTransactions , lang) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
 
     return {
         ...generqateInsights(id) ,
@@ -277,7 +277,7 @@ const generqateInsight3f2B = (id , sortedFilterTransactions , lang) => {
 }
 
 const generqateInsight393 = (id: any , length , reduce , lang: any) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "doubleBox" ,
@@ -312,7 +312,7 @@ const generqateInsight393 = (id: any , length , reduce , lang: any) => {
 }
 
 const generqateInsight586 = (id: any , amount: any , lang: any) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "image" ,
@@ -333,7 +333,7 @@ const generqateInsight586 = (id: any , amount: any , lang: any) => {
 }
 
 const generqateInsight34c = (id: any , transactions: any , lang: any) => {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     return {
         ...generqateInsights(id) ,
         teaserTemplate: "pinChart" ,
@@ -365,7 +365,7 @@ const generqateInsight34c = (id: any , transactions: any , lang: any) => {
 }
 
 function generqateInsight7a5(id: any ,categoryDescription,  lang: any) {
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     const teaser = teaserBlocks(id , lang , curDate);
     teaser[2].text = teaser[2].text.replace("{{categoryDescription}}" , categoryDescription);
     teaser[2].text = teaser[2].text.replace("{{month}}" , monthNames[lang][curDate.getMonth() - 1]);
@@ -391,7 +391,7 @@ function generqateInsight7a5(id: any ,categoryDescription,  lang: any) {
 export default (id , transactions: any , lang , messages) => {
     insightsMessages = messages;
     let amount;
-    const curDate = new Date();
+    const curDate = new Date("2019-02-28");
     const prevDate = new Date((new Date).setMonth(curDate.getMonth() - 1));
     transactions = transactions.map(t =>
         ({
@@ -408,14 +408,14 @@ export default (id , transactions: any , lang , messages) => {
                 (length = amount.filter((a: any , i) =>
                     i !== idx && a.amount == item.amount && a.transaction === item.transaction &&
                     (new Date(a.date)).getTime() === (new Date(item.date)).getTime() &&
-                    Math.ceil(Math.abs(new Date().getTime() -
+                    Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                         new Date(a.date).getTime()) / (1000 * 3600 * 24)) <= 4).length + 1) > 1
             );
             return length > 1 ? generqateInsight67f(id , transactions , value , length , lang) : null;
         case "66b719da-5a83-433b-bd82-c8ed2ca1685c":
             amount = transactions.filter(t =>
                 t.type === "DepositCheck" && t.Mode === "In" &&
-                Math.ceil(Math.abs(new Date().getTime() -
+                Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4);
             return amount.length ? generqateInsight85c(id , amount , lang) : null;
         case "0ebf81f1-273a-47b2-ae66-59fc50520da0":
@@ -431,7 +431,7 @@ export default (id , transactions: any , lang , messages) => {
             });
             amount = amount.sort((a , b) => -1 * a.date.getTime() - b.date.getTime()).slice(0 , 5).reverse();
             return amount.find(t =>
-                Math.ceil(Math.abs(new Date().getTime() -
+                Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4) ?
                 generqateInsightda0(id , amount , lang) : null;
         case "16052c32-574b-4a15-882e-0286e4d64fe0":
@@ -445,9 +445,9 @@ export default (id , transactions: any , lang , messages) => {
                 if (new Date(t.date).getDate() > curDate.getDate()) diffMonths--;
                 return t.categoryDescription === "Government" && t.Mode === "In" && diffMonths < 12;
             });
-            amount = amount.sort((a , b) => -1 * a.date.getTime() - b.date.getTime()).slice(0 , 5).reverse();
+            amount = amount.sort((a , b) => -1 *(a.date.getTime() - b.date.getTime())).slice(0 , 5).reverse();
             return amount.find(t =>
-                Math.ceil(Math.abs(new Date().getTime() -
+                Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 4) ?
                 generqateInsightfe0(id , amount , lang) : null;
         case "147443c7-7be1-4f68-8ff3-ce65e992c22c":
@@ -473,7 +473,7 @@ export default (id , transactions: any , lang , messages) => {
                     return diffMonths === 2;
                 })
             ];
-            return amount[0].length && amount[1].length && curDate.getDate() < 20 ? generqateInsight372(id , amount , lang) : null;
+            return amount[0].length && amount[1].length && curDate.getDate() < 30 ? generqateInsight372(id , amount , lang) : null;
         case "6b739292-bb50-4284-9d66-342de48403f2":
             const filterOutTansaction = groupBy(transactions.filter(t => {
                     let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
@@ -489,7 +489,7 @@ export default (id , transactions: any , lang , messages) => {
                 category: tran[0].categoryDescription ,
                 value: Math.abs(tran.map(t => +t.amount).reduce((a , b) => a + b))
             })).sort((a , b) => a.value > b.value ? -1 : 1);
-            return sortedFilterOutTransactions.length && curDate.getDate() < 20 ?
+            return sortedFilterOutTransactions.length && curDate.getDate() < 30 ?
                 generqateInsight3f2(id , sortedFilterOutTransactions , lang) : null;
         case "6b739292-bb50-4284-9d66-342de48403f2-b":
             const filterInTransaction = groupBy(transactions.filter(t =>
@@ -501,20 +501,20 @@ export default (id , transactions: any , lang , messages) => {
                 category: tran[0].categoryDescription ,
                 value: Math.abs(tran.map(t => +t.amount).reduce((a , b) => a + b))
             })).sort((a , b) => a.value > b.value ? -1 : 1)
-            return sortedFilterInTransactions.length && curDate.getDate() < 20 ?
+            return sortedFilterInTransactions.length && curDate.getDate() < 30 ?
                 generqateInsight3f2B(id , sortedFilterInTransactions , lang) : null;
         case "c71202e6-46b8-42ec-ba53-5dc25d6db393":
             amount = transactions.filter((t: any) => t.type === "PostedCheck" &&
-                t.Mode === "Out" && Math.ceil(Math.abs(new Date().getTime() -
+                t.Mode === "Out" && Math.ceil(Math.abs(new Date("2019-02-28").getTime() -
                     new Date(t.date).getTime()) / (1000 * 3600 * 24)) <= 2);
             return amount.length ?
                 generqateInsight393(id , amount.length , amount.map(t => +t.amount).reduce((a , b) => a + b) , lang) : null;
         case "b6b765af-0378-4413-a4f3-aa83d816d586":
             amount = transactions;
-            return amount.length && curDate.getDate() % 3 === 2 ?
+            return amount.length ?
                 generqateInsight586(id , amount , lang) : null;
         case "22741535-e6d1-4aa3-93de-a021efb8f34c":
-            amount = transactions.filter(t => t.mode === "Out" && (new Date(t.date)).getDate() === (new Date()).getDate());
+            amount = transactions.filter(t => t.mode === "Out" && (new Date(t.date)).getDate() === (new Date("2019-02-28")).getDate());
             amount = groupBy(amount , item => [item.transaction]);
             const periods = [1 , 2 , 3];
             amount = amount.filter(a => !periods.filter(pp => !a.find(t => {
@@ -535,7 +535,7 @@ export default (id , transactions: any , lang , messages) => {
             theTransactions = theTransactions.map(t => groupBy(t , item =>
                 [(new Date(item.date)).getMonth() , (new Date(item.date)).getFullYear()]));
             theTransactions = theTransactions.map(theT => theT.filter(theTransactions_0 => {
-                const curDate = new Date();
+                const curDate = new Date("2019-02-28");
                 let t = theTransactions_0[0];
                 let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
                 let curYear , curMonth = curDate.getMonth() + 1;
@@ -547,12 +547,12 @@ export default (id , transactions: any , lang , messages) => {
 
             }));
             const peri = [2 , 3 , 4];
-            theTransactions = theTransactions.map(theTransaction => ({
+            theTransactions = theTransactions.filter(item => item[0] && item[0][0]).map(theTransaction => ({
                 theTransactions: theTransaction ,
                 categoryDescription:theTransaction[0][0].categoryDescription,
                 avg: peri.map(p => {
                     var trans = theTransaction.filter(theTransactions_0 => {
-                        const curDate = new Date();
+                        const curDate = new Date("2019-02-28");
                         let t = theTransactions_0[0];
                         let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
                         let curYear , curMonth = curDate.getMonth() + 1;
@@ -568,7 +568,7 @@ export default (id , transactions: any , lang , messages) => {
             }));
             theTransactions = theTransactions.map(tt => {
                 const lastTr = tt.theTransactions.filter(theTransactions_0 => {
-                    const curDate = new Date();
+                    const curDate = new Date("2019-02-28");
                     let t = theTransactions_0[0];
                     let usrYear , usrMonth = new Date(t.date).getMonth() + 1;
                     let curYear , curMonth = curDate.getMonth() + 1;
@@ -587,7 +587,7 @@ export default (id , transactions: any , lang , messages) => {
                 }
             });
             theTransactions = theTransactions.sort((a,b)=>a.Difference -b.Difference );
-            return theTransactions.length && curDate.getDate() < 20 ?
+            return theTransactions.length && curDate.getDate() < 30 ?
                 generqateInsight7a5(id ,theTransactions[0].categoryDescription, lang) : null;
         default:
             break;
